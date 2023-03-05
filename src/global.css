@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply antialiased text-neutral-5;
+}
+
+.buttons {
+	@apply flex gap-2 justify-between;
+}
+
+.button-label {
+	@apply w-full;
+}
+.buttons label {
+	@apply p-4 block bg-neutral-2 font-bold text-xl text-neutral-5 w-full text-center rounded-lg cursor-pointer hover:bg-neutral-2 transition;
+}
+
+.button-label input {
+	@apply hidden;
+}
+
+.buttons input:checked + label {
+	@apply bg-sefi text-neutral-0;
+}
+
+.checkbox {
+	@apply w-5 h-5 rounded-full;
+}
+
+#dono:checked + .checkbox:after {
+	content: ">";
+	@apply absolute w-2 h-2 top-1 rounded bg-green;
+}
