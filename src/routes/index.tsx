@@ -2,18 +2,18 @@ import { component$, useStore } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
 
 export default component$(() => {
-	const store = useStore({ valor: 900, parcela: 18, dono: false });
+	const store = useStore({ valor: 1200, parcela: 18, dono: false });
 
 	return (
 		<>
-			<div class={`max-w-7xl mx-auto p-8`}>
+			<div class="max-w-5xl mx-auto px-4 md:px-8">
 				<div class="hero">
-					<div class={`flex justify-between`}>
-						<div class="py-16">
+					<div class="flex justify-between relative">
+						<div class="py-8 md:py-16 z-10">
 							<h5 class="uppercase font-bold tracking-wider text-sefi-5">
 								empréstimo na conta de luz
 							</h5>
-							<h1 class="text-5xl lg:text-6xl leading-none font-extrabold text-neutral-0">
+							<h1 class="text-3xl sm:text-5xl lg:text-6xl leading-none font-extrabold text-white">
 								Dinheiro <span class="text-yellow">rápido</span>
 								!
 								<br />{" "}
@@ -24,14 +24,22 @@ export default component$(() => {
 								<span class="text-yellow">seguro</span>.
 							</h1>
 						</div>
-						<div>Imagem</div>
+						<div class="hidden z-0 sm:block absolute right-0 -top-16 w-52 md:w-72">
+							<img
+								src="./homem-feliz-dinheiro.png"
+								alt="Na SEFI é muito rápido e fácil conseguir o seu empréstimo."
+								class="w-auto h-full"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="px-8">
-				<div class={`bg-neutral-1 p-8 rounded-3xl max-w-5xl mx-auto`}>
+			<div class="px-4 md:px-8 relative">
+				<div
+					class={`bg-white px-4 py-8 md:p-8 rounded-xl md:rounded-3xl max-w-5xl mx-auto `}
+				>
 					{/* Valor */}
-					<div>
+					<div class="basis-1/2">
 						<h4
 							class={`mb-4 text-lg font-bold uppercase tracking-wider text-center text-neutral-4`}
 						>
@@ -39,7 +47,11 @@ export default component$(() => {
 						</h4>
 						<div class="buttons">
 							{[500, 700, 900, 1200, 1500].map((item) => (
-								<div class="button-label">
+								<div
+									class={`button-label ${
+										item > 1000 ? "basis-1/2" : "basis-1/3"
+									}`}
+								>
 									<input
 										id={`valor-${item}`}
 										type="radio"
@@ -57,9 +69,9 @@ export default component$(() => {
 					</div>
 					<hr class="my-8 border-t-neutral-2" />
 					{/* Parcelas */}
-					<div>
+					<div class="basis-1/2">
 						<h4
-							class={`mb-4 text-lg font-bold uppercase tracking-wider text-center text-neutral-4`}
+							class={`mb-4 text-lg font-bold uppercase tracking-wider text-center text-neutral-4 mx-auto max-w-[240px] sm:max-w-none`}
 						>
 							Em quantas parcelas você prefere pagar?
 						</h4>
@@ -81,13 +93,13 @@ export default component$(() => {
 							))}
 						</div>
 					</div>
-					<hr class="my-8 border-t-neutral-2" />
-					<div class="flex justify-between">
+					<hr class="my-8 w-full border-t-neutral-2" />
+					<div class="flex flex-col gap-4 sm:flex-row justify-between text-center">
 						<div>
 							<div class="text-5xl font-black text-sefi">
 								R${store.valor}
 							</div>
-							<div class="flex gap-1 justify-end">
+							<div class="flex gap-1 justify-center md:justify-end">
 								<div class="font-bold text-neutral-3 text-2xl">
 									EM
 								</div>
@@ -96,8 +108,13 @@ export default component$(() => {
 								</div>
 							</div>
 						</div>
-						<div class="text-right">
-							<div class="flex items-center gap-2 mb-2">
+						<div>
+							<div
+								onClick$={() => (store.dono = !store.dono)}
+								class={`cursor-pointer text-xs flex items-center gap-2 mb-2  ${
+									!store.dono ? "text-red" : ""
+								}`}
+							>
 								<div
 									class={`checkbox ${
 										store.dono
@@ -121,19 +138,14 @@ export default component$(() => {
 										</svg>
 									)}
 								</div>
-								<label
-									for="dono"
-									onClick$={() => (store.dono = !store.dono)}
-									class={`cursor-pointer ${
-										!store.dono ? "text-red" : ""
-									}`}
-								>
+								<div>
 									Confirmo que sou o titular da conta de
 									Energia.
-								</label>
+								</div>
 							</div>
+
 							<div>
-								<button class="px-8 py-5 rounded-xl inline-flex font-black text-2xl bg-yellow text-sefi-4 hover:bg-green transition hover:text-neutral-1">
+								<button class="px-8 py-5 rounded-xl inline-flex font-black text-2xl bg-yellow text-sefi-4 hover:bg-green transition hover:text-neutral-1 whitespace-nowrap -mb-4">
 									Solicitar Empréstimo
 								</button>
 							</div>

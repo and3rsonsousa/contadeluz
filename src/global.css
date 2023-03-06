@@ -7,14 +7,14 @@ body {
 }
 
 .buttons {
-	@apply flex gap-2 justify-between;
+	@apply flex gap-2 justify-between flex-wrap;
 }
 
 .button-label {
-	@apply w-full;
+	@apply flex-1;
 }
 .buttons label {
-	@apply p-4 block bg-neutral-2 font-bold text-xl text-neutral-5 w-full text-center rounded-lg cursor-pointer hover:bg-neutral-2 transition;
+	@apply p-3 md:p-4 block bg-neutral-2 font-bold md:text-xl text-neutral-5 w-full text-center rounded-lg cursor-pointer hover:bg-neutral-2 transition;
 }
 
 .button-label input {
@@ -22,11 +22,11 @@ body {
 }
 
 .buttons input:checked + label {
-	@apply bg-sefi text-neutral-0;
+	@apply bg-sefi text-white;
 }
 
 .checkbox {
-	@apply w-5 h-5 rounded-full;
+	@apply w-5 h-5 rounded-full border border-neutral-3;
 }
 
 #dono:checked + .checkbox:after {

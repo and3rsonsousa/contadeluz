@@ -2,6 +2,9 @@ module.exports = {
 	content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
 	theme: {
 		colors: {
+			black: "#000",
+			white: "#fff",
+			transparent: "transparent",
 			sefi: {
 				DEFAULT: "#0092F9",
 				1: "#CCFFFF",
@@ -11,7 +14,6 @@ module.exports = {
 				5: "#083691",
 			},
 			neutral: {
-				0: "#fff",
 				1: "#F0F3F5",
 				2: "#E0E7EB",
 				3: "#8A9EA8",
