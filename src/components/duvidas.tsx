@@ -1,22 +1,22 @@
-import { component$, Slot } from "@builder.io/qwik";
-import Footer from "~/components/footer";
+import { component$ } from "@builder.io/qwik";
 
-import Header from "../components/header";
-
-export default component$(() => {
-	return (
-		<>
-			<main class={`bg-sefi min-h-screen relative`}>
-				<Header />
-				<section>
-					<Slot />
-				</section>
-				<Footer />
+export default component$(() => (
+	<div class="mx-auto py-8 md:pb-20 md:pt-16">
+		<h2 class="font-extrabold tracking-tighter text-5xl text-white max-w-2xl mx-auto mb-4 text-center">
+			Ainda está em dúvida sobre fazer o seu empréstimo?
+		</h2>
+		<div>
+			<div class="text-2xl text-sefi-5 font-medium text-center p-4 sm:max-w-lg mx-auto max-w-[340px]">
+				Fale com uma de nossas consultoras no WhatsApp e tire todas as
+				suas dúvidas.
+			</div>
+			<div class="text-center">
 				<a
+					class="bg-green text-white inline-flex gap-4 px-6 py-2 items-center font-extrabold text-2xl rounded-xl ring-black/5 ring-1 shadow-xl shadow-sefi-4/25"
 					href="https://api.whatsapp.com/send/?phone=5588993432811&text=Preciso%20de%20ajuda%20para%20fazer%20o%20meu%20empr%C3%A9stimo.&type=phone_number&app_absent=0"
 					target="_blank"
-					class="fixed shadow-xl shadow-neutral-4/50 grid place-items-center bottom-2 right-2 rounded-full text-white bg-green w-16 h-16"
 				>
+					<span>Zap da SEFI</span>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="800"
@@ -31,7 +31,7 @@ export default component$(() => {
 						/>
 					</svg>
 				</a>
-			</main>
-		</>
-	);
-});
+			</div>
+		</div>
+	</div>
+));

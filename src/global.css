@@ -33,3 +33,25 @@ body {
 	content: ">";
 	@apply absolute w-2 h-2 top-1 rounded bg-green;
 }
+
+.form {
+	@apply grid grid-cols-2 gap-4 md:grid-cols-3;
+}
+
+.input {
+	@apply mb-2 block;
+}
+.input-label {
+	@apply block font-bold mb-1 text-neutral-4 overflow-hidden whitespace-nowrap text-ellipsis;
+}
+.input-field {
+	@apply px-4 py-2 text-lg bg-neutral-2 rounded-lg w-full outline-none focus:ring ring-sefi ring-offset-2;
+}
+
+.button {
+	@apply px-6 py-3 rounded-lg inline-flex font-bold bg-yellow text-sefi-4 hover:bg-green transition hover:text-white whitespace-nowrap;
+}
+
+.button-large {
+	@apply px-8 py-5 rounded-xl  font-black text-2xl;
+}
