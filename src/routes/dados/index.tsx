@@ -1,4 +1,4 @@
-import { $, component$ } from "@builder.io/qwik";
+import { $, component$, useStore } from "@builder.io/qwik";
 import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import Duvidas from "~/components/duvidas";
 import Panel from "~/components/panel";
@@ -15,32 +15,41 @@ export const useData = routeLoader$(async ({ request }) => {
 
 export default component$(() => {
 	const data = useData().value;
-
-	const TestaCPF = $((strCPF: string) => {
-		let Soma, Resto;
-
-		Soma = 0;
-		if (strCPF == "00000000000") return false;
-
-		for (let i = 1; i <= 9; i++)
-			Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-		Resto = (Soma * 10) % 11;
-
-		if (Resto == 10 || Resto == 11) Resto = 0;
-		if (Resto != parseInt(strCPF.substring(9, 10))) return false;
-
-		Soma = 0;
-		for (let i = 1; i <= 10; i++)
-			Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-		Resto = (Soma * 10) % 11;
-
-		if (Resto == 10 || Resto == 11) Resto = 0;
-		if (Resto != parseInt(strCPF.substring(10, 11))) return false;
-		return true;
-	});
+	const store = useStore({ cpf: "" });
 
 	const validar = $(() => {
-		TestaCPF("");
+		console.log({ cpf: store.cpf });
+
+		const TestaCPF = (strCPF: string) => {
+			let Soma, Resto;
+
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
+
+			for (let i = 1; i <= 9; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+			Resto = (Soma * 10) % 11;
+
+			if (Resto == 10 || Resto == 11) Resto = 0;
+			if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+			Soma = 0;
+			for (let i = 1; i <= 10; i++)
+				Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+			Resto = (Soma * 10) % 11;
+
+			if (Resto == 10 || Resto == 11) Resto = 0;
+			if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+			return true;
+		};
+
+		if (TestaCPF(store.cpf)) {
+			console.log("CPF válido");
+		} else {
+			alert(
+				"Parece que o seu CPF não está correto, veja se você digitou corretamente."
+			);
+		}
 	});
 
 	return (
@@ -69,8 +78,12 @@ export default component$(() => {
 						<label class="input col-span-2 md:col-span-1">
 							<div class="input-label">CPF</div>
 							<input
+								onChange$={(event) =>
+									(store.cpf = event?.target.value)
+								}
 								class="input-field"
 								name="cpf"
+								value={store.cpf}
 								placeholder="123.456.789-00"
 							/>
 						</label>
@@ -138,6 +151,8 @@ export default component$(() => {
 							<div class="mt-4">
 								<button
 									onClick$={validar}
+									preventdefault:click
+									type="button"
 									class="button button-large"
 								>
 									Enviar
